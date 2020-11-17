@@ -14,6 +14,8 @@ namespace search_model
             Choices = choices;
         }
 
+        protected Question() {}
+
         private string statement;
         public string Statement {
             get => statement;

@@ -8,6 +8,8 @@
             Votes = votes;
         }
 
+        protected QuestionChoice() {}
+
         public string Value { get; private set; }
         public int Votes { get; private set; }
     }

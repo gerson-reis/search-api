@@ -4,13 +4,11 @@ namespace search_model
 {
     public class BaseEntity
     {
-        public BaseEntity(int id, DateTime createdOn, DateTime changedOn, bool isActiveRegister)
+        protected BaseEntity()
         {
             CreatedOn = DateTime.Now;
             IsActiveRegister = true;
         }
-
-        protected BaseEntity() {}
 
         public int Id { get; private set; }
         public DateTime CreatedOn { get; private set; }
