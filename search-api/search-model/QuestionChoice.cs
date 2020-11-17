@@ -12,5 +12,6 @@
 
         public string Value { get; private set; }
         public int Votes { get; private set; }
+        public Question Question { get; private set; }
     }
 }

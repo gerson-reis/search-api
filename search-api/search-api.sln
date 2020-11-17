@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-application", "searc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-model", "search-model\search-model.csproj", "{AD867BC9-E19B-4B18-9A74-6C7980C03180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-repository", "search-repository\search-repository.csproj", "{DE3FD389-2CDE-4CA8-9777-56D7D51B7074}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-data", "search-repository\search-data.csproj", "{DE3FD389-2CDE-4CA8-9777-56D7D51B7074}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-ioc", "search-ioc\search-ioc.csproj", "{EA8E8106-F37D-44BF-9E6D-3760D6B8FA2C}"
 EndProject
