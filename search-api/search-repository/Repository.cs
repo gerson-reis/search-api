@@ -20,16 +20,18 @@ namespace search_data
             entities = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAll() =>  entities.AsEnumerable();
+        public async Task<IEnumerable<T>> GetAll() => entities.AsEnumerable();
 
         public async Task<T> GetFirst(Expression<Func<T, bool>> where) => await entities.FirstOrDefaultAsync(where);
 
         public async Task<T> GetById(int id) => entities.SingleOrDefault(s => s.Id == id);
 
-        public async Task Insert(T entity)
+        public async Task<T> Insert(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity is null");
-            entities.Add(entity);
+            await entities.AddAsync(entity);
+            context.SaveChanges();
+            return entity;
         }
 
         public async Task Update(T entity)
@@ -41,7 +43,6 @@ namespace search_data
         public async Task Delete(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity is null");
-
             entities.Remove(entity);
         }
     }

@@ -17,8 +17,6 @@ namespace search_data.Configurations
             builder.Property(x => x.IsActiveRegister).IsRequired();
             builder.Property(x => x.Votes).IsRequired();
             builder.Property(x => x.CreatedOn).IsRequired();
-
-            //builder.HasOne(x => x.Question).WithMany(e => e.Choices);
         }
     }
 }

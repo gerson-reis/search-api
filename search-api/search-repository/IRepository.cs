@@ -11,7 +11,7 @@ namespace search_data
         Task<IEnumerable<T>> GetAll();
         Task<T> GetFirst(Expression<Func<T, bool>> where);
         Task<T> GetById(int id);
-        Task Insert(T entity);
+        Task<T> Insert(T entity);
         Task Update(T entity);
         Task Delete(T entity);
     }

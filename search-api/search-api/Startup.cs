@@ -50,14 +50,22 @@ namespace search_api
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Questions}/{action=Get}");
+
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Questions}/{action=Post}");
             });
         }
     }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using search_application.Handler;
 using search_data;
 
 namespace search_ioc
@@ -8,7 +10,8 @@ namespace search_ioc
         public static void Configure(IServiceCollection serviceProvider)
         {
             serviceProvider.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            serviceProvider.AddScoped<IUnitOfWork, UnitOfWork>();            
+            serviceProvider.AddScoped<IUnitOfWork, UnitOfWork>();
+            serviceProvider.AddMediatR(typeof(CreateQuestionHandler));
         }
     }
 }
