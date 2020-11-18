@@ -14,9 +14,14 @@ namespace search_ioc
             serviceProvider.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             serviceProvider.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceProvider.AddScoped<IRepository<Question>, QuestionRepository>();
-            serviceProvider.AddMediatR(typeof(CreateQuestionHandler));
+            ConfigureHandlers(serviceProvider);
+        }
 
-            
+        private static void ConfigureHandlers(IServiceCollection serviceProvider)
+        {
+            serviceProvider.AddMediatR(typeof(CreateQuestionHandler));
+            serviceProvider.AddMediatR(typeof(GetQuestionsPagedQueryHandler));
+            serviceProvider.AddMediatR(typeof(GetQuestionByIdHandler));
         }
     }
 }

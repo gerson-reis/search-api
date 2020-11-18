@@ -61,7 +61,8 @@ namespace search_api
                 endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Questions}/{action=Post}");
-                endpoints.MapControllerRoute("getQUestion", "{controller=Questions}/{action=Get}/{question_id?}");
+                endpoints.MapControllerRoute("getQUestion", "{controller=Questions}/{action=Get}/{question_id}");
+                endpoints.MapControllerRoute("getQUestion", "{controller=Questions}/{action=Get}/{offset}/{limit}/{filter}");
             });
         }
     }

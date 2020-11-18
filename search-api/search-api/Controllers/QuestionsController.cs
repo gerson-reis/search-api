@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace search_api.Controllers
 {
-    public class QuestionsController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class QuestionsController : ControllerBase
     {
         private readonly IMediator mediator;
 
@@ -19,8 +21,8 @@ namespace search_api.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get([FromRoute]int id)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
             if (id == 0)
                 return BadRequest("Invalid Id");
@@ -28,6 +30,20 @@ namespace search_api.Controllers
             try
             {
                 return Ok(await mediator.Send(new GetQuestionByIdQuery(id)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("/{offset?}/{limit?}/{filter?}")]
+        public async Task<IActionResult> Get([FromRoute]int limit, [FromRoute]int offset, [FromRoute]string filter)
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetQuestionsPagedQuery(offset, limit, filter)));
             }
             catch (Exception ex)
             {
