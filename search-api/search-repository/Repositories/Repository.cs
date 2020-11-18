@@ -12,7 +12,7 @@ namespace search_data
     {
 
         protected readonly SearchContext context;
-        private DbSet<T> entities;
+        protected DbSet<T> entities;
         string errorMessage = string.Empty;
         public Repository(SearchContext context)
         {
@@ -24,7 +24,7 @@ namespace search_data
 
         public async Task<T> GetFirst(Expression<Func<T, bool>> where) => await entities.FirstOrDefaultAsync(where);
 
-        public async Task<T> GetById(int id) => entities.SingleOrDefault(s => s.Id == id);
+        public virtual async Task<T> GetById(int id) => entities.SingleOrDefault(s => s.Id == id);
 
         public async Task<T> Insert(T entity)
         {

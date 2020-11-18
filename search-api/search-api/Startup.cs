@@ -39,6 +39,8 @@ namespace search_api
         {
             app.Use(async (context, next) =>
             {
+                var routes = context.Request.RouteValues;
+
                 await next.Invoke();
                 var unitOfWork = (IUnitOfWork)context.RequestServices.GetService(typeof(IUnitOfWork));
                 await unitOfWork.Commit();
@@ -54,18 +56,12 @@ namespace search_api
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Questions}/{action=Get}");
-
-                endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Questions}/{action=Post}");
+                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Questions}/{action=Post}");
+                endpoints.MapControllerRoute("getQUestion", "{controller=Questions}/{action=Get}/{question_id?}");
             });
         }
     }
