@@ -17,7 +17,7 @@ namespace search_application.Mapper
                 Image_url = question.ImageUrl,
                 Question = question.Statement,
                 Thumb_url = question.ThumbUrl,
-                Choices = question.Choices.Select(x => new QuestionChoiceDto() 
+                Choices = question.Choices?.Select(x => new QuestionChoiceDto() 
                 {
                     Id = x.Id,
                     Choice = x.Value,

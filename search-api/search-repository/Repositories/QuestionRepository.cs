@@ -17,7 +17,15 @@ namespace search_data.Repositories
 
         public override async Task<Question> GetById(int id) => entities.Include(x => x.Choices).SingleOrDefault(s => s.Id == id);
 
-        public override async Task<IEnumerable<Question>> GetPage(Expression<Func<Question, bool>> where, int limit, int offset)
-                 => entities.Include(x => x.Choices).Where(where).Skip(offset).Take(limit).AsEnumerable();        
+        public override async Task<IEnumerable<Question>> GetPage(int limit, int offset, Expression<Func<Question, bool>> where = null)
+        {
+            IQueryable<Question> querable = entities;
+            if (where != null)
+                querable = querable.Where(where);
+
+            querable = querable.Include(x => x.Choices);
+
+            return querable.Skip(offset).Take(limit).AsEnumerable();
+        }
     }
 }

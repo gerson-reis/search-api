@@ -17,10 +17,10 @@ namespace search_application.Query
 
         public int OffSet { get; set; }
         public int Limit { get; set; }
-        private string filter { get; set; }
-        public string Filter 
+        private string? filter { get; set; }
+        public string? Filter 
         {
-            get => filter.ToLower();
+            get => filter?.ToLower();
             set { filter = value; }
         }
     }

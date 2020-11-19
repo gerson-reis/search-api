@@ -22,8 +22,14 @@ namespace search_data
 
         public async Task<IEnumerable<T>> GetAll() => entities.AsEnumerable();
 
-        public async virtual Task<IEnumerable<T>> GetPage(Expression<Func<T, bool>> where, int limit, int offset) => 
-                                entities.Where(where).Skip(offset).Take(limit).AsEnumerable();
+        public async virtual Task<IEnumerable<T>> GetPage(int limit, int offset, Expression<Func<T, bool>> where = null)
+        {
+            IQueryable<T> querable = entities;
+            if (where != null)
+                querable = querable.Where(where);
+
+            return querable.Skip(offset).Take(limit).AsEnumerable();
+        }
 
         public async Task<T> GetFirst(Expression<Func<T, bool>> where) => await entities.FirstOrDefaultAsync(where);
 

@@ -22,10 +22,10 @@ namespace search_application.Handler
 
         public async Task<IEnumerable<QuestionDto>> Handle(GetQuestionsPagedQuery request, CancellationToken cancellationToken)
         {
-            var result = await repository
-                                .GetPage(x => request.Filter.Contains(x.Statement.ToLower()) || (x.Choices.Select(c => c.Value.ToLower()).Any(c => request.Filter.Contains(c))),                                
-                                request.Limit,
-                                request.OffSet);
+            var result = !string.IsNullOrEmpty(request.Filter) ?
+                                await repository
+                                .GetPage(request.Limit, request.OffSet, x => request.Filter.Contains(x.Statement.ToLower()) || (x.Choices.Select(c => c.Value.ToLower()).Any(c => request.Filter.Contains(c)))) :
+                                await repository.GetPage(request.Limit, request.OffSet);
 
             return result.AsDto();
         }
