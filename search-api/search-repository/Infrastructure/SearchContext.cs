@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using search_data.Configurations;
 using search_model;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace search_data
 {

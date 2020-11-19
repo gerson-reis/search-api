@@ -14,7 +14,7 @@ namespace search_model
         public DateTime CreatedOn { get; private set; }
         public DateTime ChangedOn { get; private set; }
         public bool IsActiveRegister { get; private set; }
-        public void DesactiveRegister()
+        public void DisableRegister()
         {
             IsActiveRegister = false;
         }

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\search-application\search-application.csproj" />
     <ProjectReference Include="..\search-repository\search-data.csproj" />
   </ItemGroup>
 

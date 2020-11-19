@@ -12,7 +12,7 @@ namespace search_data
     {
 
         protected readonly SearchContext context;
-        private DbSet<T> entities;
+        protected DbSet<T> entities;
         string errorMessage = string.Empty;
         public Repository(SearchContext context)
         {
@@ -20,28 +20,40 @@ namespace search_data
             entities = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAll() =>  entities.AsEnumerable();
+        public async Task<IEnumerable<T>> GetAll() => entities.AsEnumerable();
+
+        public async virtual Task<IEnumerable<T>> GetPage(int limit, int offset, Expression<Func<T, bool>> where = null)
+        {
+            IQueryable<T> querable = entities;
+            if (where != null)
+                querable = querable.Where(where);
+
+            return querable.Skip(offset).Take(limit).AsEnumerable();
+        }
 
         public async Task<T> GetFirst(Expression<Func<T, bool>> where) => await entities.FirstOrDefaultAsync(where);
 
-        public async Task<T> GetById(int id) => entities.SingleOrDefault(s => s.Id == id);
+        public virtual async Task<T> GetById(int id) => entities.SingleOrDefault(s => s.Id == id);
 
-        public async Task Insert(T entity)
+        public async Task<T> Insert(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity is null");
-            entities.Add(entity);
+            await entities.AddAsync(entity);
+            context.SaveChanges();
+            return entity;
         }
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity is null");
             context.Update(entity);
+            context.SaveChanges();
+            return entity;
         }
 
         public async Task Delete(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity is null");
-
             entities.Remove(entity);
         }
     }
