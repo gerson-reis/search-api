@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-api", "search-api\search-api.csproj", "{C3FF9A13-2154-45BF-9258-A0549714CC23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "search-api", "search-api\search-api.csproj", "{C3FF9A13-2154-45BF-9258-A0549714CC23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-application", "search-application\search-application.csproj", "{8D424DC9-0601-4160-87DA-E099A4D8078E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "search-application", "search-application\search-application.csproj", "{8D424DC9-0601-4160-87DA-E099A4D8078E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-model", "search-model\search-model.csproj", "{AD867BC9-E19B-4B18-9A74-6C7980C03180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "search-model", "search-model\search-model.csproj", "{AD867BC9-E19B-4B18-9A74-6C7980C03180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-data", "search-repository\search-data.csproj", "{DE3FD389-2CDE-4CA8-9777-56D7D51B7074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "search-data", "search-repository\search-data.csproj", "{DE3FD389-2CDE-4CA8-9777-56D7D51B7074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "search-ioc", "search-ioc\search-ioc.csproj", "{EA8E8106-F37D-44BF-9E6D-3760D6B8FA2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "search-ioc", "search-ioc\search-ioc.csproj", "{EA8E8106-F37D-44BF-9E6D-3760D6B8FA2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0DD53251-AB08-466D-9490-F02B1D6656CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "seach-application-test", "seach-application-test\seach-application-test.csproj", "{10036242-E8D7-41EC-AE18-DB26D8F627D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{EA8E8106-F37D-44BF-9E6D-3760D6B8FA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8E8106-F37D-44BF-9E6D-3760D6B8FA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8E8106-F37D-44BF-9E6D-3760D6B8FA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10036242-E8D7-41EC-AE18-DB26D8F627D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10036242-E8D7-41EC-AE18-DB26D8F627D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10036242-E8D7-41EC-AE18-DB26D8F627D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10036242-E8D7-41EC-AE18-DB26D8F627D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10036242-E8D7-41EC-AE18-DB26D8F627D8} = {0DD53251-AB08-466D-9490-F02B1D6656CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12C87ED4-4660-4A79-BF97-EB6FF91E0B3A}
