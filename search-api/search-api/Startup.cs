@@ -54,6 +54,8 @@ namespace search_api
                 app.UseDeveloperExceptionPage();
             }
 
+            UpdateDatabase(app);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -65,6 +67,17 @@ namespace search_api
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapHealthChecks("/health");
             });
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<SearchContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }
