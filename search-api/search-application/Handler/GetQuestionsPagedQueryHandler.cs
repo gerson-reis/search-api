@@ -23,7 +23,7 @@ namespace search_application.Handler
         public async Task<IEnumerable<QuestionDto>> Handle(GetQuestionsPagedQuery request, CancellationToken cancellationToken)
         {
             var result = await repository
-                                .GetPage(x => x.Statement.Contains(request.Filter) || x.Choices.Any(c => c.Value.Contains(request.Filter)),
+                                .GetPage(x => request.Filter.Contains(x.Statement.ToLower()) || (x.Choices.Select(c => c.Value.ToLower()).Any(c => request.Filter.Contains(c))),                                
                                 request.Limit,
                                 request.OffSet);
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using search_data;
@@ -31,6 +32,8 @@ namespace search_api
             services.AddDbContext<SearchContext>(options => options.UseSqlServer(Configuration["DefaultConnection"]));
 
             DependencyInjection.Configure(services);
+            services.AddSingleton<IConfiguration>(_ => Configuration);
+            services.AddHealthChecks().AddCheck<ApiHealthCheck>("api-check-health");
             services.AddControllers();
         }
        
@@ -60,9 +63,7 @@ namespace search_api
             {
                 endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Questions}/{action=Post}");
-                endpoints.MapControllerRoute("getQUestion", "{controller=Questions}/{action=Get}/{question_id}");
-                endpoints.MapControllerRoute("getQUestion", "{controller=Questions}/{action=Get}/{offset}/{limit}/{filter}");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

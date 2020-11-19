@@ -1,4 +1,6 @@
-﻿namespace search_model
+﻿using System;
+
+namespace search_model
 {
     public class QuestionChoice : BaseEntity
     {
@@ -9,12 +11,26 @@
 
         protected QuestionChoice() {}
 
-        public string Value { get; private set; }
+        private string value;
+        public string Value 
+        {
+            get => value;
+            private set 
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("Choice question is invalid.");
+                this.value = value;
+            }
+        }
         public int Votes { get; private set; }
         public Question Question { get; private set; }
-        public void AddVotes(int votes)
+        public void UpdateVotes(int value)
         {
-            Votes += votes;
+            Votes = value;
+        }
+        public void UpdateValue(string value)
+        {
+            Value = value;
         }
     }
 }

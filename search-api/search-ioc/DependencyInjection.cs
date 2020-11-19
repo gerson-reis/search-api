@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using search_application.Handler;
+using search_application.Services;
 using search_data;
 using search_data.Repositories;
 using search_model;
@@ -14,6 +15,8 @@ namespace search_ioc
             serviceProvider.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             serviceProvider.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceProvider.AddScoped<IRepository<Question>, QuestionRepository>();
+            serviceProvider.AddScoped<IEmailService, EmailService>();
+
             ConfigureHandlers(serviceProvider);
         }
 
@@ -22,6 +25,7 @@ namespace search_ioc
             serviceProvider.AddMediatR(typeof(CreateQuestionHandler));
             serviceProvider.AddMediatR(typeof(GetQuestionsPagedQueryHandler));
             serviceProvider.AddMediatR(typeof(GetQuestionByIdHandler));
+            serviceProvider.AddMediatR(typeof(UpdateQuestionHandler));
         }
     }
 }

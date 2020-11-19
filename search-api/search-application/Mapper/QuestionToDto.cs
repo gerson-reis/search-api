@@ -19,6 +19,7 @@ namespace search_application.Mapper
                 Thumb_url = question.ThumbUrl,
                 Choices = question.Choices.Select(x => new QuestionChoiceDto() 
                 {
+                    Id = x.Id,
                     Choice = x.Value,
                     Votes = x.Votes
                 })

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace search_api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class QuestionsController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -21,15 +20,15 @@ namespace search_api.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("questions/{question_id:int}")]
+        public async Task<IActionResult> Get([FromRoute] int question_id)
         {
-            if (id == 0)
+            if (question_id == 0)
                 return BadRequest("Invalid Id");
 
             try
             {
-                return Ok(await mediator.Send(new GetQuestionByIdQuery(id)));
+                return Ok(await mediator.Send(new GetQuestionByIdQuery(question_id)));
             }
             catch (Exception ex)
             {
@@ -38,8 +37,8 @@ namespace search_api.Controllers
         }
 
         [HttpGet]
-        [Route("/{offset?}/{limit?}/{filter?}")]
-        public async Task<IActionResult> Get([FromRoute]int limit, [FromRoute]int offset, [FromRoute]string filter)
+        [Route("questions")]
+        public async Task<IActionResult> Get([FromQuery]int limit, [FromQuery]int offset, [FromQuery]string filter)
         {
             try
             {
@@ -52,8 +51,29 @@ namespace search_api.Controllers
         }
 
         [HttpPost]
+        [Route("questions")]
         public async Task<IActionResult> Post([FromBody]CreateQuestionCommand model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                return Ok(await mediator.Send(model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut]
+        [Route("questions/{question_id:int}")]
+        public async Task<IActionResult> Put([FromRoute]int question_id, [FromBody]UpdateQuestionCommand model)
+        {
+            model.Id = question_id;
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 

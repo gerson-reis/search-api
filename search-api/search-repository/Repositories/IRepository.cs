@@ -13,7 +13,7 @@ namespace search_data
         Task<T> GetFirst(Expression<Func<T, bool>> where);
         Task<T> GetById(int id);
         Task<T> Insert(T entity);
-        Task Update(T entity);
+        Task<T> Update(T entity);
         Task Delete(T entity);
     }
 }

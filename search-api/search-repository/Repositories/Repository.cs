@@ -37,10 +37,12 @@ namespace search_data
             return entity;
         }
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity is null");
             context.Update(entity);
+            context.SaveChanges();
+            return entity;
         }
 
         public async Task Delete(T entity)
